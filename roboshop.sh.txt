@@ -1,0 +1,44 @@
+#!/bin/bash
+
+AMI=ami-03265a0778a880afb
+SG_ID=sg-087e7afb3a936fce7
+INSTANCES=("web" "catalogue" "user" "cart" "shipping"
+"payment" "mongodb" "rabbitmq" "mysql" "redis")
+ZONE_ID=""
+DOMAIN_NAME=""
+
+for i in "${INSTANCES[@]}"
+do
+echo "instance is $i"
+if [ $i == mysql ||$i == mongodb||$i == shipping ];
+then 
+Instance_TYPE="t3.small"
+else
+Instance_TYPE="t2.micro"
+fi
+IP_ADDRESS=$(aws ec2 run-instances --image-id $AMI --instance-type $Instance_TYPE  --security-group-ids $SG_ID --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0]. PrivateIpAddress' --output text)
+echo "$i: $IP_ADDRESS"
+
+# route 53 records
+
+ aws route53 change-resource-record-sets \
+ --hosted-zone-id $ZONE_ID \
+ --change-batch'
+{
+                "Comment": "Testing creating a record set",
+                 "Changes": [ {
+                  "Action": "CREATE",
+                   "ResourceRecordSet": {
+                    "Name": "'$i'.'$DOMAIN_NAME'",
+                     "Type": "A",
+                       "TTL": 1,
+                        "ResourceRecords": [{
+                         "Value": "'$IP_ADDRESS'"
+                           }]
+                            }
+                           }]
+
+}'
+done
+
+

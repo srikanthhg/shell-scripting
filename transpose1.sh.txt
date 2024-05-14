@@ -1,0 +1,11 @@
+#!/bin/bash
+
+file=file.txt
+
+while IFS=" " read -r line
+do
+fline=echo $line | $(tr -s '[:space:]' '\n' < "$file" 
+
+
+done < $file
+-----------wrong----------

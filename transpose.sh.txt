@@ -1,0 +1,7 @@
+#!/bin/bash
+
+input="This is a sample sentence to transpose words"
+output=$(echo "$input" | awk '{ for(i=NF;i>0;i--) printf("%s ",$i); print "" }')
+
+echo "Original: $input"
+echo "Transposed: $output"

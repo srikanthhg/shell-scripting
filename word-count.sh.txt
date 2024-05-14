@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#wc -w filename  - this will count the repeating words also
+
+file="/path/to/your/file.txt"
+
+# Count unique words
+unique_word_count=$(tr -s '[:space:]' '\n' < "$file" | sort | uniq -c | wc -l)
+
+echo "The file $file contains $unique_word_count unique words."
+
+
+#In this script:
+
+#tr -s '[:space:]' '\n' < "$file": This command translates spaces and other whitespace characters into newlines. It effectively splits the text into separate words.
+
+#sort: This sorts the words alphabetically.
+
+#uniq -c: This counts the occurrences of each unique word.
+
+#wc -l: This counts the number of lines, which corresponds to the number of unique words.
+
+#Finally, echo prints out the result.
+
+#This script will count each unique word only once, even if it appears multiple times in the file.
