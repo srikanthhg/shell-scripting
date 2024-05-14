@@ -1,0 +1,37 @@
+Redirections
+
+1  success
+2  failure
+&  both success and failure
+
+ls -ltr 1> temp.log
+ls -ltr 2> temp.log
+asasas  2> temp.log
+
+ls -ltr &> temp.log
+
+ls -ltr &>> temp.log
+
+SED editor = Streamline Editor:- =  temporary editor
+------------------------
+sed -e '1 a I am learning shell script' filename   --> insert it into the first line in the file
+
+2  a for 2nd line
+
+-e means enable
+-----------------------
+-e temp change
+-i for permenant
+sed -i '1 i I am learning shell script' 
+--------
+
+sed -e 's/sbin/SBIN/' filename -> replace sbin with SBIN - > by default 1st occurence in every lines
+
+s for substitute
+
+sed -e 's/sbin/SBIN/g' filename  -> all occurences
+---------------------------
+sed -e '1d' filename
+
+sed -e '/[string]/ d' filename  -  this will delete the entire line where the word is 
+

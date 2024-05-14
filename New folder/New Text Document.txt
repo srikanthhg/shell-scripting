@@ -1,0 +1,44 @@
+exit status:-
+------------
+
+echo $?
+previous command is success or not
+
+
+
+#!/bin/bash     
+if [ $(id -u) -ne 0 ]                                       
+then                                                        
+echo "should be root user1211"   
+exit 1 # you can give other than 0                           
+else  
+echo "you are root user"
+fi
+
+if there is any error shell script will proceed it will not stop like other programming languages, thats why we are stopping using "exit 1"
+
+yum install git -y
+
+if [ $? -ne 0 ]
+then
+Installation is not success
+else
+Installation is success
+fi
+
+
+
+VALIDATE(){
+
+if [ $? -ne 0 ]
+then
+Installation is not success
+else
+Installation is success
+fi
+
+}
+
+
+
+
